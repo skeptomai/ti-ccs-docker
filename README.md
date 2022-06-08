@@ -1,11 +1,9 @@
 # cd ti-ccs-docker repo
-cd /mnt/d/Projects/docker/ti-ccs-docker
 
 # build the image
 docker build -t ti-ccs .
 
-# cd project
-cd /mnt/c/dev_projects/R90_Drive_Controller
+# cd project dir
 
 # import project to workspace
 # clean and build the workspace
