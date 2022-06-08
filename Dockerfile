@@ -14,19 +14,16 @@ RUN mkdir /workdir/project && \
         libgconf-2-4 \
         libncurses5 \
         libpython2.7 \
-        libtinfo5 \
-		default-jre-headless && \
-    apt-get -y clean && apt-get -y autoremove
+        libtinfo5 && \
+    apt -y clean && apt -y autoremove
 
 RUN mkdir /workdir/cc_studio && \
 	cd /workdir/cc_studio && \
 	wget --no-check-certificate -q -O ccs11.tar.gz "https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-J1VdearkvK/11.2.0.00007/CCS11.2.0.00007_linux-x64.tar.gz" && \
 	tar xzvf ccs11.tar.gz && \
-	rm -f ccs11.tar.gz && \
 	cd CCS11.2.0.00007_linux-x64 && \
 	./ccs_setup_11.2.0.00007.run --mode unattended --prefix /opt/ti --enable-components PF_C28 && \
-	rm -rf /workdir/cc_studio && \
-	ls -la
+	rm -rf /workdir/cc_studio
 
 
 # workspace folder for CCS
