@@ -7,7 +7,6 @@ ARG arch=amd64
 RUN mkdir /workdir/project && \
 	apt update -y && apt upgrade -y && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         wget \
-        git \
         unzip \
         libc6-i386 \
         libusb-0.1-4 \
@@ -15,7 +14,7 @@ RUN mkdir /workdir/project && \
         libncurses5 \
         libpython2.7 \
         libtinfo5 && \
-    apt -y clean && apt -y autoremove
+    apt -y clean && apt -y autoremove && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /workdir/cc_studio && \
 	cd /workdir/cc_studio && \
@@ -23,6 +22,7 @@ RUN mkdir /workdir/cc_studio && \
 	tar xzvf ccs11.tar.gz && \
 	cd CCS11.2.0.00007_linux-x64 && \
 	./ccs_setup_11.2.0.00007.run --mode unattended --prefix /opt/ti --enable-components PF_C28 && \
+	cd /workdir && \
 	rm -rf /workdir/cc_studio
 
 
