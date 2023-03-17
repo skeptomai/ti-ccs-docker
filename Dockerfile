@@ -36,7 +36,7 @@ RUN mkdir /workdir/cc_studio && \
 
 # workspace folder for cube ide
 RUN mkdir /workdir/project && mkdir /workdir/ccs_workspace && \
-    chown -R ${USER_NAME}:${USER_NAME} /workdir
+    chown -R ${USER_NAME}:${USER_NAME} /workdir/project
 USER ${USER_NAME}:${USER_NAME}
 
 WORKDIR /workdir/project
