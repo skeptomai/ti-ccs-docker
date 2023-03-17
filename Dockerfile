@@ -2,10 +2,18 @@
 FROM ubuntu:20.04 as base
 WORKDIR /workdir
 
+ARG USER_NAME=jenkins
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+
+# Create a new user with the desired UID and GID
+RUN groupadd -g ${GROUP_ID} ${USER_NAME} && \
+    useradd -u ${USER_ID} -g ${GROUP_ID} -ms /bin/bash ${USER_NAME}
+
+
 # System dependencies
 ARG arch=amd64
-RUN mkdir /workdir/project && \
-	apt update -y && apt upgrade -y && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
+RUN apt update -y && apt upgrade -y && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         wget \
         unzip \
         libc6-i386 \
@@ -26,8 +34,10 @@ RUN mkdir /workdir/cc_studio && \
 	rm -rf /workdir/cc_studio
 
 
-# workspace folder for CCS
-RUN mkdir /workdir/ccs_workspace
+# workspace folder for cube ide
+RUN mkdir /workdir/project && mkdir /workdir/ccs_workspace && \
+    chown -R ${USER_NAME}:${USER_NAME} /workdir
+USER ${USER_NAME}:${USER_NAME}
 
 WORKDIR /workdir/project
 
