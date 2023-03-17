@@ -2,13 +2,13 @@
 FROM ubuntu:20.04 as base
 WORKDIR /workdir
 
-ARG USER_NAME=jenkins
-ARG USER_ID=1000
-ARG GROUP_ID=1000
+# ARG USER_NAME=jenkins
+# ARG USER_ID=1000
+# ARG GROUP_ID=1000
 
-# Create a new user with the desired UID and GID
-RUN groupadd -g ${GROUP_ID} ${USER_NAME} && \
-    useradd -u ${USER_ID} -g ${GROUP_ID} -ms /bin/bash ${USER_NAME}
+# # Create a new user with the desired UID and GID
+# RUN groupadd -g ${GROUP_ID} ${USER_NAME} && \
+#     useradd -u ${USER_ID} -g ${GROUP_ID} -ms /bin/bash ${USER_NAME}
 
 
 # System dependencies
@@ -35,9 +35,9 @@ RUN mkdir /workdir/cc_studio && \
 
 
 # workspace folder for cube ide
-RUN mkdir /workdir/project && mkdir /workdir/ccs_workspace && \
-    chown -R ${USER_NAME}:${USER_NAME} /workdir/project
-USER ${USER_NAME}:${USER_NAME}
+RUN mkdir /workdir/project && mkdir /workdir/ccs_workspace
+#     chown -R ${USER_NAME}:${USER_NAME} /workdir/project
+# USER ${USER_NAME}:${USER_NAME}
 
 WORKDIR /workdir/project
 
